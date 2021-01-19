@@ -3,7 +3,7 @@ angular.module('main').controller('indexController', ['$rootScope', 'messageServ
     $rootScope.titulo = "Lista de Contatos";
     $rootScope.messageBox = "";
     $rootScope.Pesquisa = true;
-
+    $rootScope.search = {};
     $scope.LinkGit = function() {
         window.open('https://github.com/FullCLprojetos/ListaDeContatos');
     }
