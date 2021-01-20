@@ -1,32 +1,24 @@
 <div class="contacts table" aria-labelledby="contacts-caption-text">
-    <div class="contacts-header thead">
-        <span class="th" id="th-name">Nome:</span>
-        <span class="th" id="th-phone">Numero:</span>
-        <span class="th" id="th-email">Email:</span>
-        <span class="th" id="th-contato"></span>
-    </div>
-    <ul class="tbody" ng-repeat="contato in contatos | filter:search.text">
-        <li class="tr" id="idcontato{{contato.id}}">
-            <span class="td">
-          <span class="label">Nome:</span>
-            <span class="data" aria-labelledby="th-name">{{contato.nome}}</span>
-            </span>
-            <span class="td">
-          <span class="label">Numero:</span>
-            <span class="data" aria-labelledby="th-phone">{{contato.numero}}</span>
-            </span>
-            <span class="td">
-          <span class="label">Email:</span>
-            <span class="data" aria-labelledby="th-email"><a href="{{contato.email}}">{{contato.email}}</a></span>
-            </span>
-            <span class="label"></span>
-            <span class="data" aria-labelledby="th-contato">
-              <div>
-                <button type="button" class="btn-s btn-danger" ng-confirm-click="Tem certeza que gostaria de remover ?" confirmed-click="excluir(contato.id)">Excluir</button></th>
-                <button type="button" class="btn-s btn-primary" ng-click="edita(contato.id)">Editar</button></th>
-              </div>
-            </div>
-            </span>
-        </li>
-    </ul>
+    <table class="table" id="contatos">
+        <thead class="thead-dark">
+          <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Numero</th>
+            <th>Opções</th>
+          </tr>
+        </thead>
+        <tbody id="lista_contatos">
+            <tbody id="lista_contatos" ng-repeat="contato in contatos | filter:search.text">
+                <tr ng-click="abrirContato(contato.id)" id="id_contato_{{contato.id}}" class="contatos">
+                    <td>{{contato.nome}}</td>
+                    <td>{{contato.email}}</td>
+                    <td>{{contato.numero}}</td>
+                    <td>
+                        <button type="button" class="btn-s btn-danger" ng-confirm-click="Tem certeza que gostaria de remover ?" confirmed-click="excluir(contato.id)">X</button>
+                        <button type="button" class="btn-s btn-primary" ng-click="edita(contato.id)">Editar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 </div>
