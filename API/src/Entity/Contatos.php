@@ -26,7 +26,7 @@ class Contatos implements JsonSerializable
      * @ORM\Column(type= "string")
      */
 
-    public string $numero;
+    public String $numero;
 
     /**
     * @ORM\Column(type= "string")
