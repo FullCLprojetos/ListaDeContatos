@@ -67,7 +67,7 @@ body {
     width:100%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 0px;
+    margin-top: -3%;
     background: white;
 }
 #botaoExcluir{
@@ -95,4 +95,7 @@ body {
     margin-top: 0px;
     color: red !important;
     background-color: black !important;
+}
+.invisivel{
+    display: none;
 }

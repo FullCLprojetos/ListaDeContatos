@@ -4,6 +4,7 @@ import {excluir} from "./remove.js";
 const  tbody = document.querySelector("#lista_contatos");
 const mensagem_erro = document.querySelector('#erro');
 let naoTemNada = document.querySelector("#naoTemNada");
+let campoPesquisa = document.querySelector("#pesquisa");
 
 export {conteudo,createElement,createText,addId,addNoElement,addClasse, removeClasse,tbody}
 function conteudo(pagina){
@@ -17,9 +18,13 @@ function conteudo(pagina){
             addClasse(tr, ['contatos']);
 
             let td = createElement('td');
+            addClasse(td,['nomeContatos']);
             let td2 = createElement('td');
+            addClasse(td2, ['emailContatos'])
             let td3 = createElement('td');
+            addClasse(td3,['numeroContatos'])
             let td4 = createElement('td');
+            addClasse(td4, 'qrContatos')
 
             let buttonExcluir = createElement('button');
             addId(buttonExcluir, "botaoExcluir");
@@ -50,19 +55,18 @@ function conteudo(pagina){
 
                 if (retornoConfimacao)
                 {
-                    let editado = document.querySelector(`#id_contato_${i.id}`)
-
                     window.location.replace(`${i.id}`);
 
                 }
             })
-            let qr = qrcode(0,"M");
+
             td.appendChild(createText(i.nome));
             td2.appendChild(createText(i.email));
             td3.appendChild(createText(i.numero));
             buttonExcluir.appendChild(createText("X"));
             buttonEditar.appendChild(createText("Edit"))
 
+            let qr = qrcode(0,"M");
             let data = {
                 'nome': i.nome,
                 'email': i.email,
@@ -80,9 +84,38 @@ function conteudo(pagina){
             addNoElement(tr, td4);
             addNoElement(tr, buttonExcluir);
             addNoElement(tr, buttonEditar);
-            console.log(tr);
             addNoElement(tbody, tr)
+
         });
+
+        campoPesquisa.addEventListener("input",function (){
+            let contatos = document.querySelectorAll(".contatos");
+
+            if(campoPesquisa.value.length > 0) {
+                for (let i = 0; i < contatos.length; i++) {
+                    let contato = contatos[i];
+                    let tdNome = contato.querySelector('.nomeContatos');
+                    let nome = tdNome.textContent;
+                    var expressao = new RegExp(campoPesquisa.value, "i");
+                    console.log(contato)
+
+                    if (!expressao.test(nome)) {
+                        addClasse(contato,['invisivel'])
+                    } else {
+
+                        removeClasse(contato,['invisivel'])
+                    }
+
+                }
+            }else{
+                for(let i=0; i < contatos.length;i++){
+                    let contato = contatos[i];
+                    contato.classList.remove("invisivel");
+                }
+            }
+
+        });
+
     });
 }
 

@@ -16,7 +16,7 @@ class LidadorDeErros implements EventSubscriberInterface
     public $logger;
     public function __construct(LoggerInterface $logger)
     {
-        //$this->logger = $logger; não funciona, provavelmente algum problema com o monolog
+        $this->logger = $logger; //não funciona, provavelmente algum problema com o monolog
     }
     public static function getSubscribedEvents()
     {
@@ -30,13 +30,13 @@ class LidadorDeErros implements EventSubscriberInterface
     public function AppError(ExceptionEvent $event){
         if ($event->getThrowable()instanceof AppError)
         {
-            //$this->logger->error('Um Erro interno ocorreu. {stack}', ['stack'=> $event->getThrowable()->getTraceAsString()]);
+            $this->logger->error('Um Erro interno ocorreu. {stack}', ['stack'=> $event->getThrowable()->getTraceAsString()]);
             $response = ResponseFactory::Erro($event->getThrowable());
             $event->setResponse($response->getResponse());
         }
         if ($event->getThrowable()instanceof DriverException)
         {
-            //$this->logger->error('Uma exceção ocorreu. {stack}', ['stack'=> $event->getThrowable()->getTraceAsString()]);
+            $this->logger->error('Uma exceção ocorreu. {stack}', ['stack'=> $event->getThrowable()->getTraceAsString()]);
             $response = ResponseFactory::Erro($event->getThrowable());
             $event->setResponse($response->getResponse());
         }
@@ -45,14 +45,14 @@ class LidadorDeErros implements EventSubscriberInterface
     {
         if ($event->getThrowable()instanceof NotFoundHttpException)
         {
-            //$this->logger->error('Uma exceção ocorreu. {stack}', ['stack'=> $event->getThrowable()->getTraceAsString()]);
+            $this->logger->error('Uma exceção ocorreu. {stack}', ['stack'=> $event->getThrowable()->getTraceAsString()]);
             $response = ResponseFactory::Erro($event->getThrowable());
             $event->setResponse($response->getResponse());
         }
     }
     function handleGenericException(ExceptionEvent $event)
     {
-        //$this->logger->error('Uma exceção ocorreu. {stack}', ['stack'=> $event->getThrowable()->getTraceAsString()]);
+        $this->logger->error('Uma exceção ocorreu. {stack}', ['stack'=> $event->getThrowable()->getTraceAsString()]);
         $response = ResponseFactory::Erro($event->getThrowable());
         $event->setResponse($response->getResponse());
     }
